@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ study.name }} - Study Details</title>
+</head>
+<body>
+    <h1>Study Details</h1>
+
+    <table>
+        <tr>
+            <th>Study Name:</th>
+            <td>{{ study.name }}</td>
+        </tr>
+        <tr>
+            <th>Study Phase:</th>
+            <td>{{ study.phase }}</td>
+        </tr>
+        <tr>
+            <th>Sponsor Name:</th>
+            <td>{{ study.sponsor }}</td>
+        </tr>
+        <tr>
+            <th>Description:</th>
+            <td>{{ study.description }}</td>
+        </tr>
+    </table>
+
+    <br>
+    <a href="{% url 'edit_study' study.id %}">Edit Study</a>
+    <a href="{% url 'study_list' %}">Back to Study List</a>
+</body>
+</html>
