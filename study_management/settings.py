@@ -78,12 +78,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'study_management.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+
+
 
 AUTH_PASSWORD_VALIDATORS = []
 
@@ -108,17 +104,14 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': 'errors.log',
+        'console': {
+            'class': 'logging.StreamHandler',
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
         },
     },
 }

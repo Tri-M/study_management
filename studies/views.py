@@ -20,32 +20,40 @@ def view_study(request, id):
     study = get_object_or_404(Study, id=id)
     return render(request, 'studies/view_study.html', {'study': study})
 
-
 def add_study(request):
     if request.method == 'POST':
         form = StudyForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('study_list')  # Redirect to study list
     else:
         form = StudyForm()
-    return render(request, 'studies/add_study.html', {'form': form})
+    
+    # Fetch unique sponsor names
+    sponsors = Study.objects.values_list('sponsor', flat=True).distinct()
+    
+    return render(request, 'studies/add_study.html', {'form': form, 'sponsors': sponsors})
+
 
 from django.shortcuts import render, get_object_or_404
 from .models import Study
 from .forms import StudyForm
 
 def edit_study(request, id):
-    study = get_object_or_404(Study, id=id)  
+    study = get_object_or_404(Study, id=id)
     if request.method == 'POST':
         form = StudyForm(request.POST, instance=study)
         if form.is_valid():
             form.save()
-            return redirect('study_list') 
+            return redirect('study_list')  # Redirect to study list
     else:
         form = StudyForm(instance=study)
     
-    return render(request, 'studies/edit_study.html', {'form': form, 'study': study})
+    # Fetch unique sponsor names
+    sponsors = Study.objects.values_list('sponsor', flat=True).distinct()
+    
+    return render(request, 'studies/edit_study.html', {'form': form, 'sponsors': sponsors, 'study': study})
+
 
 from django.shortcuts import redirect, get_object_or_404
 from .models import Study

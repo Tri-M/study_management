@@ -1,7 +1,29 @@
 <h1>Edit Study</h1>
-<form method="post">
+<form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.non_field_errors }}
+    <p>
+        {{ form.name.label_tag }}<br>
+        {{ form.name }}
+    </p>
+    <p>
+        {{ form.phase.label_tag }}<br>
+        {{ form.phase }}
+    </p>
+    <p>
+        {{ form.sponsor.label_tag }}<br>
+        {{ form.sponsor }}
+        <datalist id="sponsor-list">
+            {% for sponsor in sponsors %}
+            <option value="{{ sponsor }}">
+            {% endfor %}
+        </datalist>
+    </p>
+    <p>
+        {{ form.description.label_tag }}<br>
+        {{ form.description }}
+    </p>
     <button type="submit">Save</button>
 </form>
+
 <a href="{% url 'study_list' %}">Back</a>
